@@ -8,16 +8,13 @@
 #include <gtk/gtk.h>
 
 class GameObject {
+protected:
 	short x, y;
-	short dx, dy;
-	short left, top, bottom, right;
 public:
 	GameObject(short x, short y);
 	virtual ~GameObject();
-	void setVelocity(short dx, short dy);
-	void setBounds(short left, short top, short right, short bottom);
-	void tick();
-	void draw(cairo_t *cr);
+	virtual void tick();
+	virtual void draw(cairo_t *cr);
 };
 
 #endif /* KITTYMUNCHC_SRC_GAMEOBJECT_H_ */

@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 
 #include "GameObject.h"
 #include "Arm.h"

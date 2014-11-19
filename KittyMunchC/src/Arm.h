@@ -7,7 +7,9 @@
 #include <cairo.h>
 #include <gtk/gtk.h>
 
-class Arm {
+#include "GameObject.h"
+
+class Arm : public GameObject {
 	short homeX, homeY;
 	short x, y;
 	short shoulderX, shoulderY;

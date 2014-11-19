@@ -6,7 +6,7 @@
 #include <cmath>
 #include <algorithm>
 
-Arm::Arm(short homeX, short homeY, short size) : homeX(homeX), homeY(homeY), size(size) {
+Arm::Arm(short homeX, short homeY, short size) : GameObject(homeX, homeY-size), homeX(homeX), homeY(homeY), size(size) {
 	shoulderX = homeX;
 	shoulderY = homeY;
 	elbowX = 0;

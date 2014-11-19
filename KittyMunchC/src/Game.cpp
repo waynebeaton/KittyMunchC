@@ -2,7 +2,8 @@
 // All rights reserved, distributed under the terms of the Eclipse Public License 1.0.
 
 #include "Game.h"
-#include "GameObject.h"
+//#include "GameObject.h"
+#include "Ball.h"
 
 #include <iostream>
 #include <list>
@@ -11,7 +12,7 @@
 Game::Game(short width, short height) : width(width), height(height) {
 	objects = new GameObjectList();
 	for(int count=0;count<50;count++) {
-		GameObject *object = new GameObject(rand() % width, rand() % height);
+		Ball *object = new Ball(rand() % width, rand() % height);
 		object->setVelocity(rand() % 20 - 10, rand() % 20 - 10);
 		object->setBounds(0, 0, width, height);
 		objects->push_back(*object);
