@@ -22,6 +22,7 @@ public:
 
 	using GameObject::draw;
 	virtual void draw(cairo_t *cr);
+	virtual bool touches(short x, short y);
 };
 
 #endif /* KITTYMUNCHC_SRC_BALL_H_ */

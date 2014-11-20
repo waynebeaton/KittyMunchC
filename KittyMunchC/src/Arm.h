@@ -11,7 +11,6 @@
 
 class Arm : public GameObject {
 	short homeX, homeY;
-	short x, y;
 	short shoulderX, shoulderY;
 	short elbowX, elbowY;
 	short size;

@@ -15,7 +15,7 @@ Game::Game(short width, short height) : width(width), height(height) {
 		Ball *object = new Ball(rand() % width, rand() % height);
 		object->setVelocity(rand() % 20 - 10, rand() % 20 - 10);
 		object->setBounds(0, 0, width, height);
-		objects->push_back(*object);
+		objects->push_back(object);
 	}
 	arm = new Arm(500, 550, 150);
 }
@@ -27,13 +27,13 @@ Game::~Game() {
 
 void Game::tick() {
 	 for (GameObjectList::iterator object = objects->begin(); object != objects->end(); ++object)
-		 object->tick();
+		 (*object)->tick();
 	 arm->tick();
 }
 
 void Game::draw(cairo_t *cr) {
 	 for (GameObjectList::iterator object = objects->begin(); object != objects->end(); ++object)
-		 object->draw(cr);
+		 if ((*object)->isActive()) (*object)->draw(cr);
 	 arm->draw(cr);
 }
 
@@ -43,4 +43,9 @@ bool Game::isRunning() {
 
 void Game::mouseMoved(short x, short y) {
 	arm->moveTo(x, y);
+}
+
+void Game::buttonClicked() {
+	 for (GameObjectList::iterator object = objects->begin(); object != objects->end(); ++object)
+		 if ((*object)->touches(arm->x, arm->y)) (*object)->destroy();
 }

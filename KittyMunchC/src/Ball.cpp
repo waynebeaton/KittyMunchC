@@ -47,3 +47,7 @@ void Ball::draw(cairo_t *cr) {
 	  cairo_set_source_rgb(cr, 0.3, 0.4, 0.6);
 	  cairo_fill(cr);
 }
+
+bool Ball::touches(short x, short y) {
+	return (pow(x-this->x,2) + pow(y-this->y,2)) < 100;
+}

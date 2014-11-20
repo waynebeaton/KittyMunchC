@@ -14,7 +14,7 @@
 #include "GameObject.h"
 #include "Arm.h"
 
-typedef std::list<GameObject> GameObjectList;
+typedef std::list<GameObject*> GameObjectList;
 
 class Game {
 	short width, height;
@@ -27,6 +27,7 @@ public:
 	void draw(cairo_t *cr);
 	bool isRunning();
 	void mouseMoved(short x, short y);
+	void buttonClicked();
 };
 
 #endif /* KITTYMUNCHC_SRC_GAME_H_ */

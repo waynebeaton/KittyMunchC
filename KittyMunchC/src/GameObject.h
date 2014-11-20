@@ -9,12 +9,16 @@
 
 class GameObject {
 protected:
-	short x, y;
+	bool active;
 public:
+	short x, y;
 	GameObject(short x, short y);
 	virtual ~GameObject();
 	virtual void tick();
 	virtual void draw(cairo_t *cr);
+	virtual bool touches(short x, short y);
+	void destroy();
+	bool isActive();
 };
 
 #endif /* KITTYMUNCHC_SRC_GAMEOBJECT_H_ */

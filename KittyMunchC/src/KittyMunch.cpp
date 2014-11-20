@@ -31,14 +31,15 @@ static void on_draw(GtkWidget *widget, cairo_t *cr, gpointer user_data) {
 	game->draw(cr);
 }
 
-static gboolean on_key_released(GtkWidget *widget, GdkEventKey *event) {
-	return FALSE;
-}
-
 static gboolean on_mouse_moved(GtkWidget *widget, GdkEventMotion *event,
 		gpointer data) {
 	game->mouseMoved(event->x, event->y);
 
+	return TRUE;
+}
+
+static gboolean on_button_press(GtkWidget *widget, GdkEventButton  *event) {
+	if (event->button == 1) game->buttonClicked();
 	return TRUE;
 }
 
@@ -55,13 +56,11 @@ int main(int argc, char *argv[]) {
 
 	drawing = gtk_drawing_area_new();
 	gtk_container_add(GTK_CONTAINER(window), drawing);
-	//gtk_container_set_border_width (GTK_CONTAINER(window), 12);
 	g_signal_connect(drawing, "draw", G_CALLBACK (on_draw), NULL);
-	g_signal_connect(window, "key-release-event", G_CALLBACK (on_key_released), NULL);
-	g_signal_connect(drawing, "motion-notify-event",
-			G_CALLBACK (on_mouse_moved), NULL);
+	g_signal_connect(drawing, "motion-notify-event", G_CALLBACK (on_mouse_moved), NULL);
+	g_signal_connect(drawing, "button-press-event", G_CALLBACK(on_button_press), NULL);
 
-	gtk_widget_set_events(drawing, gtk_widget_get_events(drawing)|GDK_POINTER_MOTION_MASK);
+	gtk_widget_set_events(drawing, gtk_widget_get_events(drawing)|GDK_POINTER_MOTION_MASK|GDK_BUTTON_PRESS_MASK);
 
 	gtk_widget_show_all(window);
 	g_timeout_add(1000 / FPS, (GSourceFunc) on_tick, NULL);
